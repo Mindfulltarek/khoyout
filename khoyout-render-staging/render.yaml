@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: khoyout-staging
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_PREVIEW_MODE
+        value: "false"
+      - key: DISABLE_STORE_ORDERS
+        value: "true"
+      - key: DATABASE_PATH
+        value: data/khoyout.sqlite
+      - key: OWNER_ADMIN_EMAIL
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
